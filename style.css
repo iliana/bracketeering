@@ -1,0 +1,326 @@
+body {
+	font-family: sans-serif;
+	font-size: 11pt;
+}
+
+/* ranking table */
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table {
+	border-color: #999;
+	border-width: 1px 1px 0 0;
+	border-style: solid;
+	border-collapse: collapse;
+}
+
+table th, table td {
+	border-color: #999;
+	border-width: 0 0 1px 1px;
+	border-style: solid;
+	margin: 0;
+	padding: .3em .6em;
+}
+
+tr:nth-child(odd) {
+	background-color: #fcfcfc;
+}
+
+th {
+	background-color: #eee;
+
+}
+
+td {
+	text-align: right;
+}
+
+td:nth-child(2) {
+	text-align: left;
+}
+
+/* bracket */
+
+.firstfour {
+	margin: 2em auto 0;
+	text-align: center;
+}
+
+.firstfour ul {
+	width: 9%;
+	height: 2.75em;
+	margin: 0 2%;
+	text-align: right;
+	display: inline-block;
+	background-color: #f3f3f3;
+	border: 1px solid #999;
+	position: relative;
+}
+
+.firstfour ul li {
+	position: absolute;
+	left: .5em;
+	right: .5em;
+}
+
+.firstfour ul li:first-child {
+	bottom: 1.375em;
+}
+
+.firstfour ul li:last-child {
+	top: 1.375em;
+}
+
+.firstfour ul span {
+	position: absolute;
+	left: 0;
+	bottom: .0875em;
+	font-size: .75em;
+}
+
+.match li {
+	position: relative;
+}
+
+.half1 .match span {
+	position: absolute;
+	left: .5em;
+	bottom: .325em;
+	font-size: .75em;
+}
+
+.half2 .match span {
+	position: absolute;
+	right: .5em;
+	bottom: .325em;
+	font-size: .75em;
+}
+
+.bracket {
+	position: relative;
+	width: 100%;
+}
+
+.bracket ul, .firstfour ul {
+	padding: 0;
+	list-style-type: none;
+}
+
+.bracket em, .firstfour em {
+	font-style: inherit;
+	font-weight: bold;
+}
+
+.bracket ins, .firstfour ins {
+	text-decoration: inherit;
+	color: #090;
+}
+
+.bracket del, .firstfour del {
+	color: #900;
+}
+
+.half1 .match {
+	text-align: right;
+}
+
+.round1, .round2 {
+	position: absolute;
+	width: 8%;
+}
+
+.round3, .round4, .round5 {
+	position: absolute;
+	width: 9%;
+}
+
+.finalfour li {
+	position: absolute;
+	width: 9%;
+	text-align: center;
+}
+
+.champion {
+	position: absolute;
+	width: 10%;
+	height: 1.25em;
+	padding: 1em 0;
+	margin-top: 24.5em;
+	text-align: center;
+	border: 1px solid #999;
+}
+
+.round1 .match, .round2 .match {
+	height: 2.75em;
+	background-color: #f3f3f3;
+	border-color: #999;
+	border-width: 0 1px 0 0;
+	border-style: solid;
+}
+
+.half2 .round1 .match, .half2 .round2 .match {
+	border-width: 0 0 0 1px;
+}
+
+.round1 .match li, .round2 .match li {
+	border-width: 0;
+	border-color: #999;
+	border-style: solid;
+	display: block;
+	height: 1.375em;
+	padding: 1px .5em 0 .5em;
+}
+
+.round1 .match li:first-child, .round2 .match li:first-child {
+	border-top-width: 1px;
+	margin-bottom: -4px;
+}
+
+.round1 .match li:last-child, .round2 .match li:last-child {
+	border-bottom-width: 1px;
+}
+
+.round3 .match {
+	height: 12.5em;
+	margin: .5em 0;
+}
+
+.round4 .match {
+	height: 25.5em;
+	margin: .5em 0;
+}
+
+.round5 .match {
+	height: 51.5em;
+	margin: .5em 0;
+}
+
+.round3 .match li, .round4 .match li, .round5 .match li {
+	border-width: 0 0 1px 0;
+	border-color: #999;
+	border-style: solid;
+	display: block;
+	padding-left: .5em;
+	padding-right: .5em;
+	vertical-align: bottom;
+	height: 1.25em;
+}
+
+.round3 .match li:first-child {
+	padding-top: 1.875em;
+}
+
+.round3 .match li:last-child {
+	padding-top: 5.125em;
+	border-right-width: 1px;
+}
+
+.round4 .match li:first-child {
+	padding-top: 5.125em;
+}
+
+.round4 .match li:last-child {
+	padding-top: 11.625em;
+	border-right-width: 1px;
+}
+
+.round5 .match li:first-child {
+	padding-top: 11.625em;
+}
+
+.round5 .match li:last-child {
+	padding-top: 24.625em;
+	border-right-width: 1px;
+}
+
+.half2 .round3 .match li:last-child,
+.half2 .round4 .match li:last-child,
+.half2 .round5 .match li:last-child {
+	border-width: 0 0 1px 1px;
+}
+
+.finalfour .match li {
+	border-width: 0;
+	border-color: #999;
+	border-style: solid;
+	display: block;
+	height: 1.25em;
+	margin-top: 13.375em;
+}
+
+.finalfour .match li:first-child {
+	border-width: 0 0 1px 0;
+	padding-top: 5.125em;
+}
+
+.finalfour .match li:last-child {
+	border-width: 0 0 1px 0;
+	padding-top: 18.25em;
+}
+
+.round1 .match {
+	margin: .5em 0;
+}
+
+.round2 .match {
+	margin: 3.75em 0;
+}
+
+.half1 .round1 {
+	left: 0;
+}
+
+.half1 .round2 {
+	left: 8%;
+}
+
+.half1 .round3 {
+	left: 16%;
+}
+
+.half1 .round4 {
+	left: 25%;
+}
+
+.half1 .round5 {
+	left: 34%;
+}
+
+.half2 .round1 {
+	right: 0;
+}
+
+.half2 .round2 {
+	right: 8%;
+}
+
+.half2 .round3 {
+	right: 16%;
+}
+
+.half2 .round4 {
+	right: 25%;
+}
+
+.half2 .round5 {
+	right: 34%;
+}
+
+.finalfour li:first-child {
+	left: 43%;
+}
+
+.finalfour li:last-child {
+	left: 48%;
+}
+
+.champion {
+	left: 45%;
+}
+
+.round2 .match:first-child {
+	margin-top: 2.125em;
+}

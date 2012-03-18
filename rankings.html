@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bracket pool rankings</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Bracket pool rankings</h1>
+    <p>Click a name to view bracket</p>
+    <table id="rankings">
+      <tr>
+        <th><abbr title="Rank">Rk</abbr></th>
+        <th>Name</th>
+        <th><abbr title="Round 1 (First Four)">R1</abbr></th>
+        <th><abbr title="Round 2">R2</abbr></th>
+        <th><abbr title="Round 3">R3</abbr></th>
+        <th><abbr title="Sweet Sixteen">SS</abbr></th>
+        <th><abbr title="Elite Eight">EE</abbr></th>
+        <th><abbr title="Final Four">FF</abbr></th>
+        <th><abbr title="Championship Game">FIN</abbr></th>
+        <th>Total</th>
+        <th><abbr title="Points Possible">PP</abbr></th>
+      </tr>
+      {% for row in ranks %}
+      <tr>
+        <td>{{ row[1] }}</td>
+        <td><a href="{{ row[0] }}.html">{{ row[0] }}</a></td>
+        {% for score in scores[row[0]] %}
+        <td>{{ score }}</td>
+        {% endfor %}
+        <td>{{ scores[row[0]]|sum }}</td>
+        <td>{{ pointsp[row[0]] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+  <!-- vim: set ts=2 sw=2 sta et: -->
+</html>

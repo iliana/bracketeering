@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bracket for {{ name }} ({{ rank }})</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <table id="rankings" class="centered">
+      <tr>
+        <th><abbr title="Rank">Rk</abbr></th>
+        <th>Name</th>
+        <th><abbr title="Round 1 (First Four)">R1</abbr></th>
+        <th><abbr title="Round 2">R2</abbr></th>
+        <th><abbr title="Round 3">R3</abbr></th>
+        <th><abbr title="Sweet Sixteen">SS</abbr></th>
+        <th><abbr title="Elite Eight">EE</abbr></th>
+        <th><abbr title="Final Four">FF</abbr></th>
+        <th><abbr title="Championship Game">FIN</abbr></th>
+        <th>Total</th>
+        <th><abbr title="Points Possible">PP</abbr></th>
+      </tr>
+      <tr>
+        <td>{{ rank }}</td>
+        <td><a href="{{ name }}.html">{{ name }}</a></td>
+        {% for score in scores %}
+        <td>{{ score }}</td>
+        {% endfor %}
+        <td>{{ scores|sum }}</td>
+        <td>{{ pointsp }}</td>
+      </tr>
+    </table>
+    <div class="firstfour">
+      {% for i in range(4) %}
+      <ul class="match">
+        <li><span>{{ firstfourseed[i] }}</span> {{ firstfour[2*i] }}</li>
+        <li><span>{{ firstfourseed[i] }}</span> {{ firstfour[2*i+1] }}</li>
+      </ul>
+      {% endfor %}
+    </div>
+    <div class="bracket">
+      <div class="half1">
+        <div class="round1">
+          {% for i in range(16) %}
+          <ul class="match">
+            <li><span>{{ seedorder[(2*i) % 16] }}</span> {{ team[0][2*i] }}</li>
+            <li><span>{{ seedorder[(2*i+1) % 16] }}</span> {{ team[0][2*i+1] }}</li>
+          </ul>
+          {% endfor %}
+        </div>
+        <div class="round2">
+          {% for i in range(8) %}
+          <ul class="match">
+            <li>{{ team[1][2*i] }}</li>
+            <li>{{ team[1][2*i+1] }}</li>
+          </ul>
+          {% endfor %}
+        </div>
+        <div class="round3">
+          {% for i in range(4) %}
+          <ul class="match">
+            <li>{{ team[2][2*i] }}</li>
+            <li>{{ team[2][2*i+1] }}</li>
+          </ul>
+          {% endfor %}
+        </div>
+        <div class="round4">
+          {% for i in range(2) %}
+          <ul class="match">
+            <li>{{ team[3][2*i] }}</li>
+            <li>{{ team[3][2*i+1] }}</li>
+          </ul>
+          {% endfor %}
+        </div>
+        <div class="round5">
+          <ul class="match">
+            <li>{{ team[4][0] }}</li>
+            <li>{{ team[4][1] }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="half2">
+        <div class="round1">
+          {% for i in range(16) %}
+          <ul class="match">
+            <li><span>{{ seedorder[(2*i) % 16] }}</span> {{ team[0][32+2*i] }}</li>
+            <li><span>{{ seedorder[(2*i+1) % 16] }}</span> {{ team[0][32+2*i+1] }}</li>
+          </ul>
+          {% endfor %}
+        </div>
+        <div class="round2">
+          {% for i in range(8) %}
+          <ul class="match">
+            <li>{{ team[1][16+2*i] }}</li>
+            <li>{{ team[1][16+2*i+1] }}</li>
+          </ul>
+          {% endfor %}
+        </div>
+        <div class="round3">
+          {% for i in range(4) %}
+          <ul class="match">
+            <li>{{ team[2][8+2*i] }}</li>
+            <li>{{ team[2][8+2*i+1] }}</li>
+          </ul>
+          {% endfor %}
+        </div>
+        <div class="round4">
+          {% for i in range(2) %}
+          <ul class="match">
+            <li>{{ team[3][4+2*i] }}</li>
+            <li>{{ team[3][4+2*i+1] }}</li>
+          </ul>
+          {% endfor %}
+        </div>
+        <div class="round5">
+          <ul class="match">
+            <li>{{ team[4][2] }}</li>
+            <li>{{ team[4][3] }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="finalfour">
+        <ul class="match">
+          <li>{{ team[5][0] }}</li>
+          <li>{{ team[5][1] }}</li>
+        </ul>
+      </div>
+      <div class="champion">{{ team[6][0] }}</div>
+    </div>
+  </body>
+  <!-- vim: set ts=2 sw=2 sta et: -->
+</html>

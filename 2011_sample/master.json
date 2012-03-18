@@ -1,0 +1,13 @@
+[
+	["UTSA", "CLEM", "VCU", "UNCA"],
+	["OSU", "GMU", "WVU", "UK", "MARQ", "SYR", "WASH", "UNC",
+	"DUKE", "MICH", "ARIZ", "TEX", "CIN", "CONN", "TEM", "SDSU",
+	"KU", "ILL", "RICH", "MORE", "VCU", "PUR", "FSU", "ND",
+	"PITT", "BUT", "KSU", "WIS", "GONZ", "BYU", "UCLA", "FLA"],
+	["OSU", "UK", "MARQ", "UNC", "DUKE", "ARIZ", "CONN", "SDSU",
+	"KU", "RICH", "VCU", "FSU", "BUT", "WIS", "BYU", "FLA"],
+	["UK", "UNC", "ARIZ", "CONN", "KU", "VCU", "BUT", "FLA"],
+	["UK", "CONN", "VCU", "BUT"],
+	["CONN", "BUT"],
+	["CONN"]
+]
