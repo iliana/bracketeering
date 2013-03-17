@@ -325,11 +325,11 @@ def main():
                 htmlbracket[0].append(team)
             else:
                 htmlbracket[0].append(teamnames[team])
-        for round in range(1, 4):
+        for round in range(1, 5):
             htmlbracket[round] = [('<abbr title="{0}">{1}'
                                    '</abbr>'.format(teamnames[i], i))
                                   for i in brackets[name][round]]
-        for round in range(4, 7):
+        for round in range(5, 7):
             htmlbracket[round] = [teamnames[i] for i in brackets[name][round]]
         j = 0
         for i in range(len(htmlbracket[0])):

@@ -32,8 +32,8 @@
     <div class="firstfour">
       {% for i in range(4) %}
       <ul class="match">
-        <li><span>{{ firstfourseed[i] }}</span> {{ firstfour[2*i] }}</li>
-        <li><span>{{ firstfourseed[i] }}</span> {{ firstfour[2*i+1] }}</li>
+        <li><span class="seed">{{ firstfourseed[i] }}</span> <span class="team">{{ firstfour[2*i] }}</span></li>
+        <li><span class="seed">{{ firstfourseed[i] }}</span> <span class="team">{{ firstfour[2*i+1] }}</span></li>
       </ul>
       {% endfor %}
     </div>
@@ -42,8 +42,8 @@
         <div class="round1">
           {% for i in range(16) %}
           <ul class="match">
-            <li><span>{{ seedorder[(2*i) % 16] }}</span> {{ team[0][2*i] }}</li>
-            <li><span>{{ seedorder[(2*i+1) % 16] }}</span> {{ team[0][2*i+1] }}</li>
+            <li><span class="seed">{{ seedorder[(2*i) % 16] }}</span> <span class="team">{{ team[0][2*i] }}</span></li>
+            <li><span class="seed">{{ seedorder[(2*i+1) % 16] }}</span> <span class="team">{{ team[0][2*i+1] }}</span></li>
           </ul>
           {% endfor %}
         </div>
@@ -82,8 +82,8 @@
         <div class="round1">
           {% for i in range(16) %}
           <ul class="match">
-            <li><span>{{ seedorder[(2*i) % 16] }}</span> {{ team[0][32+2*i] }}</li>
-            <li><span>{{ seedorder[(2*i+1) % 16] }}</span> {{ team[0][32+2*i+1] }}</li>
+            <li><span class="seed">{{ seedorder[(2*i) % 16] }}</span> <span class="team">{{ team[0][32+2*i] }}</span></li>
+            <li><span class="seed">{{ seedorder[(2*i+1) % 16] }}</span> <span class="team">{{ team[0][32+2*i+1] }}</span></li>
           </ul>
           {% endfor %}
         </div>

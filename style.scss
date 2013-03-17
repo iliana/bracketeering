@@ -3,6 +3,10 @@ body {
 	font-size: 11pt;
 }
 
+abbr {
+	border-width: inherit;
+}
+
 .centered {
 	margin-left: auto;
 	margin-right: auto;
@@ -40,12 +44,29 @@ table {
 .match {
 	li {
 		position: relative;
+
+		.team {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: inline-block;
+			-moz-box-sizing: padding-box;
+			width: 100%;
+
+			.half1 &, .firstfour & {
+				padding-left: 2ch;
+			}
+
+			.half2 & {
+				padding-right: 2ch;
+			}
+		}
 	}
 
-	span {
+	.seed {
 		position: absolute;
 		bottom: .325em;
-		font-size: .75em;
+		font-size: .8em;
 
 		.half1 & {
 			left: .5em;
@@ -218,34 +239,21 @@ table {
 	text-align: center;
 
 	ul {
-		width: 9%;
+		width: 14%;
 		height: 2.75em;
 		margin: 0 2%;
 		text-align: right;
 		display: inline-block;
 		background-color: #f3f3f3;
 		border: 1px solid #999;
-		position: relative;
-
-		span {
-			position: absolute;
-			left: 0;
-			bottom: .0875em;
-			font-size: .75em;
-		}
 	}
 
 	li {
-		position: absolute;
-		left: .5em;
-		right: .5em;
+		padding: 1px 0.5em 0;
+		position: relative;
 
 		&:first-child {
-			bottom: 1.375em;
-		}
-
-		&:last-child {
-			top: 1.375em;
+			margin-bottom: -3px;
 		}
 	}
 }
@@ -254,24 +262,24 @@ table {
 	position: absolute;
 }
 
-.round1, .round2 {
-	width: 8%;
+.round1 {
+	width: 14%;
 }
 
-.round3, .round4, .round5 {
-	width: 9%;
+.round2, .round3, .round4, .round5 {
+	width: 6.5%;
 }
 
 .finalfour li {
-	width: 9%;
+	width: 14%;
 	text-align: center;
 
 	&:first-child {
-		left: 43%;
+		left: 40%;
 	}
 
 	&:last-child {
-		left: 48%;
+		left: 46%;
 	}
 }
 
@@ -291,19 +299,19 @@ table {
 	}
 
 	.round2 {
-		left: 8%;
+		left: 14%;
 	}
 
 	.round3 {
-		left: 16%;
+		left: 20.5%;
 	}
 
 	.round4 {
-		left: 25%;
+		left: 27%;
 	}
 
 	.round5 {
-		left: 34%;
+		left: 33.5%;
 	}
 }
 
@@ -313,18 +321,18 @@ table {
 	}
 
 	.round2 {
-		right: 8%;
+		right: 14%;
 	}
 
 	.round3 {
-		right: 16%;
+		right: 20.5%;
 	}
 
 	.round4 {
-		right: 25%;
+		right: 27%;
 	}
 
 	.round5 {
-		right: 34%;
+		right: 33.5%;
 	}
 }
