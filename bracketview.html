@@ -1,14 +1,18 @@
+{% macro attrs(round, i) -%}
+{% set data = bracket[round][i] %}
+{% if data -%}
+class="{% if 'class' in kwargs %}{{ kwargs['class'] }} {% endif %}team-{{ data['team'] }}{% if data['correct'] == True %} correct{% elif data['correct'] == False %} incorrect{% endif %}{% if data['won'] == True %} won{% endif %}"
+data-team="{{ data['team'] }}"
+data-teamname="{{ data['teamname'] }}"
+{%- endif %}
+{%- endmacro %}
 {% macro team(round, i) -%}
 {% set data = bracket[round][i] %}
-{% if round != 7 %}<li>{% endif %}
-{% if round == 0 %}<span class="seed">{{ data['seed'] }}</span> <span class="team">{% endif %}
-{% if round == 1 %}<span class="seed">{{ seedorder[i%16] }}</span> <span class="team">{% endif %}
+{% if round != 7 %}<li {{ attrs(round, i) }}>{% endif %}
+{% if round == 0 %}<span class="seed">{{ data['seed'] }}</span>{% endif %}
+{% if round == 1 %}<span class="seed">{{ seedorder[i%16] }}</span>{% endif %}
 {% if data -%}
-{% if data['correct'] == True %}<ins>{% elif data['correct'] == False %}<del>{% endif %}
-{% if data['won'] == True %}<em>{% endif %}
-{% if round in (2, 3, 4, 5) %}{{ data['team'] }}{% else %}{{ data['teamname'] }}{% endif %}
-{% if data['won'] == True %}</em>{% endif %}
-{% if data['correct'] == True %}</ins>{% elif data['correct'] == False %}</del>{% endif %}
+<span class="team">{% if round in (2, 3, 4, 5) %}{{ data['team'] }}{% else %}{{ data['teamname'] }}{% endif %}</span>
 {%- endif %}
 {% if round in (0, 1) %}</span>{% endif %}
 {% if round != 7 %}</li>{% endif %}
@@ -42,6 +46,6 @@
           {{ team(6, 1) }}
         </ul>
       </div>
-      <div class="champion">{{ team(7, 0) }}</div>
+      <div {{ attrs(7, 0, class="champion") }}>{{ team(7, 0) }}</div>
     </div>
 {# vim: set ts=2 sw=2 sta et syntax=jinja: #}

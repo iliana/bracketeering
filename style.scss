@@ -46,7 +46,7 @@ table {
 	li {
 		position: relative;
 
-		.team {
+		.seed + .team {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -214,17 +214,18 @@ table {
 		list-style-type: none;
 	}
 
-	em {
+	.won .team {
 		font-style: inherit;
 		font-weight: bold;
 	}
 
-	ins {
-		text-decoration: inherit;
+	.correct .team {
+		text-decoration: none;
 		color: #090;
 	}
 
-	del {
+	.incorrect .team {
+		text-decoration: line-through;
 		color: #900;
 	}
 }
