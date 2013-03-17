@@ -8,6 +8,10 @@ abbr {
 	border-width: inherit;
 }
 
+button {
+	font-size: 1.5em;
+}
+
 .centered {
 	margin-left: auto;
 	margin-right: auto;
@@ -45,6 +49,10 @@ table {
 body.chooser .match .team:hover {
 	background-color: #ff9;
 	cursor: pointer;
+}
+
+body.highlight .match .team-empty {
+	background-color: #ff0;
 }
 
 .match {
@@ -312,6 +320,14 @@ body.chooser .match .team:hover {
 	&.user-selected {
 		font-family: serif;
 	}
+}
+
+.below-champ {
+	width: 14%;
+	text-align: center;
+	position: absolute;
+	left: 43%;
+	margin-top: 34.5em;
 }
 
 .half1 {

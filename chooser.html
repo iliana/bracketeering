@@ -7,8 +7,59 @@
   <body class="chooser">
     <p>Select the teams you think will win each game of the tournament. When you have selected a team for each game, a submission button will appear.</p>
 {% include "bracketview.html" with context %}
+    <div class="below-champ">
+      <p id="nagbox">Decide <span id="nagboxcount">67</span> more games</p>
+      <p><button id="submit">Ready to submit</button></p>
+    </div>
+    <form id="submitform" style="display: none;" action="" method="post">
+      <input type="hidden" name="bracketjson" id="bracketjson">
+    </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
+      function random() {
+        $('.match').each(function() {
+          $(this).children().eq(Math.floor(Math.random()*2)).children('.team').click();
+        });
+      }
+
+      function entrycode() {
+        var list = [[], [], [], [], [], [], []]
+        var round, team;
+
+        $('.teambox.user-selected').each(function () {
+          round = $(this).attr('data-round') - 1;
+          team = $(this).attr('data-team');
+
+          list[round].push(team);
+        });
+
+        return JSON.stringify(list);
+      }
+
+      function checkentry() {
+        var i = 67;
+
+        $('.teambox.user-selected .team').each(function () {
+          if ($(this).parent().attr('data-team')) {
+            i -= 1;
+          }
+        });
+
+        $('#nagboxcount').text(i);
+
+        if (i <= 0) {
+          $('#nagbox').hide();
+          $('#submit').show();
+        }
+        else
+        {
+          $('#nagbox').show();
+          $('#submit').hide();
+        }
+
+        return i;
+      }
+
       function teamclick() {
         // set a bunch of variables
         var teambox = $(this).parent();
@@ -17,8 +68,6 @@
         var round = teambox.attr('data-round');
         var next = $('#' + teambox.attr('data-next'));
         var next_team = $('#' + teambox.attr('data-next') + ' .team');
-
-        console.debug(team);
 
         // check if next round is already filled
         var old_team = next.attr('data-team');
@@ -57,10 +106,17 @@
             }
           }
         }
+
+        checkentry();
       }
 
       $(document).ready(function() {
         $('.match .team').click(teamclick);
+        checkentry();
+        $('#submit').click(function () {
+          $('#bracketjson').val(entrycode());
+          $('#submitform').submit();
+        });
       });
     </script>
   </body>
