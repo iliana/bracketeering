@@ -125,6 +125,7 @@ def main():
     firstfour = []  # actually eight
     nextsixty = []  # actually sixty
     teamnames = {}
+    seeds = {}
     try:
         startfile = open(os.path.join(dir, 'start.txt'))
     except IOError as e:
@@ -133,6 +134,7 @@ def main():
         sys.exit(2)
     lines = startfile.read().splitlines()
     startfile.close()
+    i = 0
     for lineno in range(1, len(lines) + 1):
         line = lines[lineno - 1]
         if '/' in line:
@@ -150,6 +152,8 @@ def main():
                     teamnames[team2[0]] = team2[1]
                 else:
                     teamnames[team2[0]] = team2[0]
+                seeds[team1[0]] = SEEDORDER[i]
+                seeds[team2[0]] = SEEDORDER[i]
             else:
                 sys.stderr.write("error: start.txt: line %d has multiple "
                                  "slashes\n" % lineno)
@@ -164,17 +168,16 @@ def main():
             start.append(team)
             teams.append(team)
             nextsixty.append(team)
+            seeds[team] = SEEDORDER[i]
+        i += 1
+        if i >= 16:
+            i = 0
     if len(teams) != 68 or len(teamnames) != 68 or len(start) != 64:
         sys.stderr.write("error: start.txt: not enough teams\n")
         sys.exit(2)
     if len(firstfour) != 8:
         sys.stderr.write("error: start.txt: not enough first four games\n")
         sys.exit(2)
-    # Determine seeds of First Four games
-    firstfourseeds = []
-    for i in range(64):
-        if isinstance(start[i], list):
-            firstfourseeds.append(SEEDORDER[i % 16])
     # Read in master.json
     try:
         masterfile = open(os.path.join(dir, 'master.json'))
@@ -282,12 +285,12 @@ def main():
     try:
         infile = open('style.css')
     except IOError as e:
-        sys.stderr.write("error: {0}: {1}\n".format(dir, e))
+        sys.stderr.write("error: {0}: {1}\n".format('style.css', e))
         sys.exit(2)
     try:
         outfile = open(os.path.join(outdir, 'style.css'), 'w')
     except IOError as e:
-        sys.stderr.write("error: {0}: {1}\n".format(dir, e))
+        sys.stderr.write("error: {0}: {1}\n".format('style.css', e))
         sys.exit(2)
     outfile.write(infile.read())
     infile.close()
@@ -297,7 +300,7 @@ def main():
     try:
         outfile = open(os.path.join(outdir, 'index.html'), 'w')
     except IOError as e:
-        sys.stderr.write("error: {0}: {1}\n".format(dir, e))
+        sys.stderr.write("error: {0}: {1}\n".format('index.html', e))
         sys.exit(2)
     htmlvars = {
         'ranks': ranks,
@@ -308,76 +311,87 @@ def main():
     outfile.write(html)
     outfile.close()
     brackettpl = env.get_template('bracketpage.html')
-    htmlfirstfour = [teamnames[i] for i in firstfour]
-    if len(master) != 0:
-        for i in range(len(htmlfirstfour)):
-            if firstfour[i] in master[0]:
-                htmlfirstfour[i] = '<em>' + htmlfirstfour[i] + '</em>'
+    brackets = {'bracket1': brackets['bracket1']}
     for name in brackets:
         try:
             outfile = open(os.path.join(outdir, name + '.html'), 'w')
         except IOError as e:
-            sys.stderr.write("error: {0}: {1}\n".format(dir, e))
+            sys.stderr.write("error: {0}: {1}\n".format(name + '.html', e))
             sys.exit(2)
-        htmlbracket = [list() for i in range(7)]
+        bracket = [list() for _ in range(8)]
+        # handle rounds 0 (first four) and 1 (round of 64)
+        counter = 0
         for team in start:
             if isinstance(team, list):
-                htmlbracket[0].append(team)
+                for otherteam in team:
+                    bracket[0].append({'team': otherteam,
+                                       'teamname': teamnames[otherteam],
+                                       'seed': seeds[otherteam],
+                                       'won': otherteam in master[0],
+                                       'correct': None,
+                                       'winnerof': None})
+                if team[0] in brackets[name][0]:
+                    otherteam = team[0]
+                else:
+                    otherteam = team[1]
+                bracket[1].append({'team': otherteam,
+                                   'teamname': teamnames[otherteam],
+                                   'seed': seeds[otherteam],
+                                   'won': otherteam in master[1],
+                                   'correct': correct[name][0][counter],
+                                   'winnerof': (0, counter)})
+                counter += 1
             else:
-                htmlbracket[0].append(teamnames[team])
-        for round in range(1, 5):
-            htmlbracket[round] = [('<abbr title="{0}">{1}'
-                                   '</abbr>'.format(teamnames[i], i))
-                                  for i in brackets[name][round]]
-        for round in range(5, 7):
-            htmlbracket[round] = [teamnames[i] for i in brackets[name][round]]
-        j = 0
-        for i in range(len(htmlbracket[0])):
-            if isinstance(htmlbracket[0][i], list):
-                # determine who the user picked
-                for team in brackets[name][0]:
-                    if team in htmlbracket[0][i]:
-                        teamname = teamnames[team]
-                        if len(master) > 1:
-                            if team in master[1]:
-                                teamname = '<em>' + teamname + '</em>'
-                        if correct[name][0][j] is True:
-                            htmlbracket[0][i] = '<ins>' + teamname + '</ins>'
-                        elif correct[name][0][j] is False:
-                            htmlbracket[0][i] = '<del>' + teamname + '</del>'
-                        else:
-                            htmlbracket[0][i] = teamname
-                j += 1
-            else:
-                if start[i] in master[1]:
-                    htmlbracket[0][i] = \
-                        '<em>{0}</em>'.format(htmlbracket[0][i])
-        for round in range(1, len(master) - 1):
-            for i in range(2**(6-round)):
-                if brackets[name][round][i] in master[round + 1]:
-                    htmlbracket[round][i] = \
-                        '<em>{0}</em>'.format(htmlbracket[round][i])
-        for round in range(1, 7):
-            for i in range(2**(6-round)):
-                if correct[name][round][i] is True:
-                    htmlbracket[round][i] = \
-                        '<ins>{0}</ins>'.format(htmlbracket[round][i])
-                elif correct[name][round][i] is False:
-                    htmlbracket[round][i] = \
-                        '<del>{0}</del>'.format(htmlbracket[round][i])
+                bracket[1].append({'team': team,
+                                   'teamname': teamnames[team],
+                                   'seed': seeds[team],
+                                   'won': team in master[1],
+                                   'correct': None,
+                                   'winnerof': None})
+        for round in range(2, 8):
+            for i in range(2**(7-round)):
+                teams = [bracket[round-1][j]['team'] for j in (i*2, i*2+1)]
+                if teams[0] in brackets[name][round-1]:
+                    team = teams[0]
+                elif teams[1] in brackets[name][round-1]:
+                    team = teams[1]
+                else:
+                    bracket[round].append(None)
+                    break
+                if round < 7:
+                    won = team in master[round]
+                else:
+                    won = False
+                bracket[round].append({
+                    'team': team,
+                    'teamname': teamnames[team],
+                    'seed': seeds[team],
+                    'won': won,
+                    'correct': correct[name][round-1][i],
+                    'winnerof': (round-1, i),
+                })
         htmlvars = {
             'name': name,
             'rank': dict(ranks)[name],
             'scores': scores[name],
             'pointsp': pointsp[name],
-            'firstfourseed': firstfourseeds,
-            'firstfour': htmlfirstfour,
-            'seedorder': SEEDORDER,
-            'team': htmlbracket,
+            'bracket': bracket,
         }
         html = brackettpl.render(**htmlvars)
         outfile.write(html)
         outfile.close()
+    return
+    try:
+        outfile = open(os.path.join(outdir, 'chooser.html'), 'w')
+    except IOError as e:
+        sys.stderr.write("error: {0}: {1}\n".format('chooser.html', e))
+        sys.exit(2)
+    choosertpl = env.get_template('chooser.html')
+    htmlvars = {
+    }
+    html = choosertpl.render(**htmlvars)
+    outfile.write(html)
+    outfile.close()
 
 if __name__ == '__main__':
     main()

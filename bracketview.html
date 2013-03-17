@@ -1,0 +1,44 @@
+{% macro team(round, i) -%}
+{% set data = bracket[round][i] %}
+{% if round != 7 %}<li>{% endif %}
+{% if round in (0, 1) %}<span class="seed">{{ data['seed'] }}</span> <span class="team">{% endif %}
+{% if data['correct'] == True %}<ins>{% elif data['correct'] == False %}<del>{% endif %}
+{% if data['won'] == True %}<em>{% endif %}
+{% if round in (2, 3, 4, 5) %}{{ data['team'] }}{% else %}{{ data['teamname'] }}{% endif %}
+{% if data['won'] == True %}</em>{% endif %}
+{% if data['correct'] == True %}</ins>{% elif data['correct'] == False %}</del>{% endif %}
+{% if round in (0, 1) %}</span>{% endif %}
+{% if round != 7 %}</li>{% endif %}
+{%- endmacro %}
+    <div class="firstfour">
+      {% for i in range(4) %}
+      <ul class="match">
+        {{ team(0, 2*i) }}
+        {{ team(0, 2*i+1) }}
+      </ul>
+      {% endfor %}
+    </div>
+    <div class="bracket">
+      {% for half in range(2) %}
+      <div class="half{{ half + 1 }}">
+        {% for round in range(1, 6) %}
+        <div class="round{{ round }}">
+          {% for i in range(2**(5-round)) %}
+          <ul class="match">
+            {{ team(round, half*2**(6-round) + 2*i) }}
+            {{ team(round, half*2**(6-round) + 2*i + 1) }}
+          </ul>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+      {% endfor %}
+      <div class="finalfour">
+        <ul class="match">
+          {{ team(6, 0) }}
+          {{ team(6, 1) }}
+        </ul>
+      </div>
+      <div class="champion">{{ team(7, 0) }}</div>
+    </div>
+{# vim: set ts=2 sw=2 sta et syntax=jinja: #}
