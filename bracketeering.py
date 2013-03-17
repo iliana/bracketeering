@@ -311,7 +311,6 @@ def main():
     outfile.write(html)
     outfile.close()
     brackettpl = env.get_template('bracketpage.html')
-    brackets = {'bracket1': brackets['bracket1']}
     for name in brackets:
         try:
             outfile = open(os.path.join(outdir, name + '.html'), 'w')
