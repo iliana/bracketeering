@@ -1,7 +1,7 @@
 {% macro attrs(round, i) -%}
 {% set data = bracket[round][i] %}
 {% if data -%}
-class="{% if 'class' in kwargs %}{{ kwargs['class'] }} {% endif %}team-{{ data['team'] }}{% if data['correct'] == True %} correct{% elif data['correct'] == False %} incorrect{% endif %}{% if data['won'] == True %} won{% endif %}"
+class="{% if 'class' in kwargs %}{{ kwargs['class'] }} {% endif %}teambox team-{{ data['team'] }}{% if data['correct'] == True %} correct{% elif data['correct'] == False %} incorrect{% endif %}{% if data['won'] == True %} won{% endif %}"
 data-team="{{ data['team'] }}"
 data-teamname="{{ data['teamname'] }}"
 {%- endif %}

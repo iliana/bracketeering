@@ -46,13 +46,18 @@ table {
 	li {
 		position: relative;
 
+		.team {
+			display: inline-block;
+			width: 100%;
+			line-height: 1;
+			margin: .1875em 0;
+		}
+
 		.seed + .team {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			display: inline-block;
 			-moz-box-sizing: padding-box;
-			width: 100%;
 
 			.half1 &, .firstfour & {
 				padding-left: 2ch;
