@@ -6,21 +6,23 @@ import simplejson
 import sys
 
 # Constants for winners of these rounds (*not* the teams in each round)
-FIRSTFOUR=0
-SECONDROUND=1
-THIRDROUND=2
-SWEETSIXTEEN=3
-ELITEEIGHT=4
-FINALFOUR=5
-CHAMPIONSHIP=7
+FIRSTFOUR = 0
+SECONDROUND = 1
+THIRDROUND = 2
+SWEETSIXTEEN = 3
+ELITEEIGHT = 4
+FINALFOUR = 5
+CHAMPIONSHIP = 7
 
-ROUNDNAMES=["first four", "second round", "third round", "sweet sixteen",
-            "elite eight", "final four", "championship game"]
-ROUNDSCORES=[2**i for i in range(7)]
-SEEDORDER=[1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15]
+ROUNDNAMES = ["first four", "second round", "third round", "sweet sixteen",
+              "elite eight", "final four", "championship game"]
+ROUNDSCORES = [2**i for i in range(7)]
+SEEDORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15]
+
 
 class BracketValidationError(StandardError):
     pass
+
 
 def chunks(l, n):
     """
@@ -29,6 +31,7 @@ def chunks(l, n):
     """
     for i in xrange(0, len(l), n):
         yield l[i:i+n]
+
 
 def flatten(l):
     """
@@ -41,6 +44,7 @@ def flatten(l):
         else:
             x.append(i)
     return x
+
 
 def team_has_played(start, master, firstfour, team, round):
     """
@@ -66,6 +70,7 @@ def team_has_played(start, master, firstfour, team, round):
                 return sum([x in master[round] for x in matchup]) == 1
         return False
 
+
 def validate_bracket(start, teams, firstfour, nextsixty, bracket,
                      incomplete=False):
     if not incomplete and len(bracket) < 7:
@@ -76,8 +81,9 @@ def validate_bracket(start, teams, firstfour, nextsixty, bracket,
     if not incomplete or (incomplete and len(bracket[0]) == 4):
         for matchup in chunks(firstfour, 2):
             if sum([x in bracket[0] for x in flatten(matchup)]) != 1:
-                raise BracketValidationError("matchup %s doesn't have exactly one winner in first "
-                                             "four" % matchup)
+                msg = ("matchup {0} doesn't have exactly one winner in "
+                       "first four".format(matchup))
+                raise BracketValidationError(msg)
     # Validate further rounds
     if incomplete:
         end = len(bracket)
@@ -89,11 +95,16 @@ def validate_bracket(start, teams, firstfour, nextsixty, bracket,
         if not incomplete or i + 1 != end:
             for matchup in chunks(start, 2**i):
                 if sum([x in bracket[i] for x in flatten(matchup)]) != 1:
-                    raise BracketValidationError("matchup %s has no winner in %s" % (matchup, round))
+                    msg = "matchup {0} has no winner in {1}".format(matchup,
+                                                                    round)
+                    raise BracketValidationError(msg)
         for team in bracket[i]:
             if i != 1 or team in firstfour:
                 if team not in bracket[i - 1]:
-                    raise BracketValidationError("%s can't win in %s without having won in %s" % (team, round, prevround))
+                    msg = ("{0} can't win in {1} without having won "
+                           "in {2}".format(team, round, prevround))
+                    raise BracketValidationError(msg)
+
 
 def main():
     # Check what directory we're reading data from
@@ -106,7 +117,7 @@ def main():
     try:
         files = os.listdir(dir)
     except OSError as e:
-        sys.stderr.write("error: %s: %s\n" % (dir, e[1]))
+        sys.stderr.write("error: {0}: {1}\n".format(dir, e[1]))
         sys.exit(2)
     # Read in start.txt
     start = []
@@ -116,8 +127,8 @@ def main():
     try:
         startfile = open(os.path.join(dir, 'start.txt'))
     except IOError as e:
-        sys.stderr.write("error: %s: %s\n" % (os.path.join(dir, 'start.txt'),
-                                              e[1]))
+        sys.stderr.write("error: {0}: {1}\n".format(
+            os.path.join(dir, 'start.txt'), e[1]))
         sys.exit(2)
     lines = startfile.read().splitlines()
     startfile.close()
@@ -151,8 +162,8 @@ def main():
     try:
         masterfile = open(os.path.join(dir, 'master.json'))
     except IOError as e:
-        sys.stderr.write("error: %s: %s\n" % (os.path.join(dir, 'master.json'),
-                                              e[1]))
+        sys.stderr.write("error: {0}: {1}\n".format(
+            os.path.join(dir, 'master.json'), e[1]))
         sys.exit(2)
     master = simplejson.load(masterfile)
     masterfile.close()
@@ -160,7 +171,7 @@ def main():
     try:
         validate_bracket(start, teams, firstfour, nextsixty, master, True)
     except BracketValidationError as e:
-        sys.stderr.write("error: master.json: %s\n" % e)
+        sys.stderr.write("error: master.json: {0}\n".format(e))
         sys.exit(3)
     # Read in brackets
     brackets = {}
@@ -178,7 +189,7 @@ def main():
             try:
                 validate_bracket(start, teams, firstfour, nextsixty, bracket)
             except BracketValidationError as e:
-                sys.stderr.write("error: %s: %s\n" % (filename, e))
+                sys.stderr.write("error: {0}: {1}\n".format(filename, e))
                 sys.exit(3)
             brackets[name] = bracket
     # Score brackets
@@ -212,7 +223,8 @@ def main():
             roundscore = 0
             for team in brackets[name][i]:
                 if i != SECONDROUND and team in brackets[name][i-1]:
-                    if correct[name][i-1][brackets[name][i-1].index(team)] == False:
+                    if correct[name][i-1][brackets[name][i-1].index(team)] \
+                       is False:
                         roundcorrect.append(False)
                         continue
                 if team_has_played(start, master, firstfour, team, i):
@@ -253,12 +265,12 @@ def main():
     try:
         infile = open('style.css')
     except IOError as e:
-        sys.stderr.write("error: %s: %s\n" % (dir, e[1]))
+        sys.stderr.write("error: {0}: {1}\n".format(dir, e))
         sys.exit(2)
     try:
         outfile = open(os.path.join(outdir, 'style.css'), 'w')
     except IOError as e:
-        sys.stderr.write("error: %s: %s\n" % (dir, e[1]))
+        sys.stderr.write("error: {0}: {1}\n".format(dir, e))
         sys.exit(2)
     outfile.write(infile.read())
     infile.close()
@@ -268,12 +280,12 @@ def main():
     try:
         outfile = open(os.path.join(outdir, 'index.html'), 'w')
     except IOError as e:
-        sys.stderr.write("error: %s: %s\n" % (dir, e[1]))
+        sys.stderr.write("error: {0}: {1}\n".format(dir, e))
         sys.exit(2)
     htmlvars = {
-            'ranks': ranks,
-            'scores': scores,
-            'pointsp': pointsp,
+        'ranks': ranks,
+        'scores': scores,
+        'pointsp': pointsp,
     }
     html = rankstpl.render(**htmlvars)
     outfile.write(html)
@@ -288,7 +300,7 @@ def main():
         try:
             outfile = open(os.path.join(outdir, name + '.html'), 'w')
         except IOError as e:
-            sys.stderr.write("error: %s: %s\n" % (dir, e[1]))
+            sys.stderr.write("error: {0}: {1}\n".format(dir, e))
             sys.exit(2)
         htmlbracket = list(brackets[name])
         htmlbracket[0] = list(start)
@@ -301,9 +313,9 @@ def main():
                         if len(master) > 1:
                             if team in master[1]:
                                 team = '<em>' + team + '</em>'
-                        if correct[name][0][j] == True:
+                        if correct[name][0][j] is True:
                             htmlbracket[0][i] = '<ins>' + team + '</ins>'
-                        elif correct[name][0][j] == False:
+                        elif correct[name][0][j] is False:
                             htmlbracket[0][i] = '<del>' + team + '</del>'
                         else:
                             htmlbracket[0][i] = team
@@ -311,22 +323,25 @@ def main():
         for round in range(0, len(master) - 1):
             for i in range(2**(6-round)):
                 if htmlbracket[round][i] in master[round + 1]:
-                    htmlbracket[round][i] = '<em>' + htmlbracket[round][i] + '</em>'
+                    htmlbracket[round][i] = \
+                        '<em>{0}</em>'.format(htmlbracket[round][i])
         for round in range(1, 7):
             for i in range(2**(6-round)):
-                if correct[name][round][i] == True:
-                    htmlbracket[round][i] = '<ins>' + htmlbracket[round][i] + '</ins>'
-                elif correct[name][round][i] == False:
-                    htmlbracket[round][i] = '<del>' + htmlbracket[round][i] + '</del>'
+                if correct[name][round][i] is True:
+                    htmlbracket[round][i] = \
+                        '<ins>{0}</ins>'.format(htmlbracket[round][i])
+                elif correct[name][round][i] is False:
+                    htmlbracket[round][i] = \
+                        '<del>{0}</del>'.format(htmlbracket[round][i])
         htmlvars = {
-                'name': name,
-                'rank': dict(ranks)[name],
-                'scores': scores[name],
-                'pointsp': pointsp[name],
-                'firstfourseed': firstfourseeds,
-                'firstfour': htmlfirstfour,
-                'seedorder': SEEDORDER,
-                'team': htmlbracket,
+            'name': name,
+            'rank': dict(ranks)[name],
+            'scores': scores[name],
+            'pointsp': pointsp[name],
+            'firstfourseed': firstfourseeds,
+            'firstfour': htmlfirstfour,
+            'seedorder': SEEDORDER,
+            'team': htmlbracket,
         }
         html = brackettpl.render(**htmlvars)
         outfile.write(html)
