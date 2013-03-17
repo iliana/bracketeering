@@ -326,7 +326,8 @@ def main():
                     bracket[0].append({'team': otherteam,
                                        'teamname': teamnames[otherteam],
                                        'seed': seeds[otherteam],
-                                       'won': otherteam in master[0],
+                                       'won': (len(master) >= 1 and
+                                               otherteam in master[0]),
                                        'correct': None,
                                        'winnerof': None})
                 if team[0] in brackets[name][0]:
@@ -336,7 +337,8 @@ def main():
                 bracket[1].append({'team': otherteam,
                                    'teamname': teamnames[otherteam],
                                    'seed': seeds[otherteam],
-                                   'won': otherteam in master[1],
+                                   'won': (len(master) >= 2 and
+                                           otherteam in master[1]),
                                    'correct': correct[name][0][counter],
                                    'winnerof': (0, counter)})
                 counter += 1
@@ -344,7 +346,8 @@ def main():
                 bracket[1].append({'team': team,
                                    'teamname': teamnames[team],
                                    'seed': seeds[team],
-                                   'won': team in master[1],
+                                   'won': (len(master) >= 2 and
+                                           team in master[1]),
                                    'correct': None,
                                    'winnerof': None})
         for round in range(2, 8):
@@ -357,15 +360,11 @@ def main():
                 else:
                     bracket[round].append(None)
                     break
-                if round < 7:
-                    won = team in master[round]
-                else:
-                    won = False
                 bracket[round].append({
                     'team': team,
                     'teamname': teamnames[team],
                     'seed': seeds[team],
-                    'won': won,
+                    'won': len(master) >= round+1 and team in master[round],
                     'correct': correct[name][round-1][i],
                     'winnerof': (round-1, i),
                 })
