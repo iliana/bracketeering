@@ -375,6 +375,7 @@ def main():
             'scores': scores[name],
             'pointsp': pointsp[name],
             'bracket': bracket,
+            'seedorder': SEEDORDER,
         }
         html = brackettpl.render(**htmlvars)
         outfile.write(html)

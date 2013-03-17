@@ -1,12 +1,15 @@
 {% macro team(round, i) -%}
 {% set data = bracket[round][i] %}
 {% if round != 7 %}<li>{% endif %}
-{% if round in (0, 1) %}<span class="seed">{{ data['seed'] }}</span> <span class="team">{% endif %}
+{% if round == 0 %}<span class="seed">{{ data['seed'] }}</span> <span class="team">{% endif %}
+{% if round == 1 %}<span class="seed">{{ seedorder[i%16] }}</span> <span class="team">{% endif %}
+{% if data -%}
 {% if data['correct'] == True %}<ins>{% elif data['correct'] == False %}<del>{% endif %}
 {% if data['won'] == True %}<em>{% endif %}
 {% if round in (2, 3, 4, 5) %}{{ data['team'] }}{% else %}{{ data['teamname'] }}{% endif %}
 {% if data['won'] == True %}</em>{% endif %}
 {% if data['correct'] == True %}</ins>{% elif data['correct'] == False %}</del>{% endif %}
+{%- endif %}
 {% if round in (0, 1) %}</span>{% endif %}
 {% if round != 7 %}</li>{% endif %}
 {%- endmacro %}
