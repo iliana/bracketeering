@@ -1,6 +1,7 @@
 body {
 	font-family: sans-serif;
-	font-size: 11pt;
+	font-size: 14px;
+	line-height: 1.375;
 }
 
 abbr {
@@ -65,8 +66,7 @@ table {
 
 	.seed {
 		position: absolute;
-		bottom: .325em;
-		font-size: .8em;
+		color: #666;
 
 		.half1 & {
 			left: .5em;
@@ -251,9 +251,10 @@ table {
 	li {
 		padding: 1px 0.5em 0;
 		position: relative;
+		height: 1.375em;
 
 		&:first-child {
-			margin-bottom: -3px;
+			margin-bottom: -4px;
 		}
 	}
 }
