@@ -319,7 +319,8 @@ def main():
             sys.exit(2)
         bracket = [list() for _ in range(8)]
         # handle rounds 0 (first four) and 1 (round of 64)
-        counter = 0
+        i = 0
+        j = 0
         for team in start:
             if isinstance(team, list):
                 for otherteam in team:
@@ -329,7 +330,8 @@ def main():
                                        'won': (len(master) >= 1 and
                                                otherteam in master[0]),
                                        'correct': None,
-                                       'winnerof': None})
+                                       'winnerof': None,
+                                       'next': (1, j)})
                 if team[0] in brackets[name][0]:
                     otherteam = team[0]
                 else:
@@ -339,9 +341,9 @@ def main():
                                    'seed': seeds[otherteam],
                                    'won': (len(master) >= 2 and
                                            otherteam in master[1]),
-                                   'correct': correct[name][0][counter],
-                                   'winnerof': (0, counter)})
-                counter += 1
+                                   'correct': correct[name][0][i],
+                                   'winnerof': (0, i)})
+                i += 1
             else:
                 bracket[1].append({'team': team,
                                    'teamname': teamnames[team],
@@ -350,6 +352,7 @@ def main():
                                            team in master[1]),
                                    'correct': None,
                                    'winnerof': None})
+            j += 1
         for round in range(2, 8):
             for i in range(2**(7-round)):
                 teams = [bracket[round-1][j]['team'] for j in (i*2, i*2+1)]
@@ -379,14 +382,41 @@ def main():
         html = brackettpl.render(**htmlvars)
         outfile.write(html)
         outfile.close()
-    return
     try:
         outfile = open(os.path.join(outdir, 'chooser.html'), 'w')
     except IOError as e:
         sys.stderr.write("error: {0}: {1}\n".format('chooser.html', e))
         sys.exit(2)
     choosertpl = env.get_template('chooser.html')
+    bracket = [list() for _ in range(8)]
+    # handle rounds 0 (first four) and 1 (round of 64)
+    j = 0
+    for team in start:
+        if isinstance(team, list):
+            for otherteam in team:
+                bracket[0].append({'team': otherteam,
+                                   'teamname': teamnames[otherteam],
+                                   'seed': seeds[otherteam],
+                                   'won': False,
+                                   'correct': None,
+                                   'winnerof': None,
+                                   'next': (1, j)})
+            if team[0] in brackets[name][0]:
+                otherteam = team[0]
+            else:
+                otherteam = team[1]
+            bracket[1].append(None)
+        else:
+            bracket[1].append({'team': team,
+                               'teamname': teamnames[team],
+                               'seed': seeds[team],
+                               'won': False,
+                               'correct': None,
+                               'winnerof': None})
+        j += 1
     htmlvars = {
+        'bracket': bracket,
+        'seedorder': SEEDORDER,
     }
     html = choosertpl.render(**htmlvars)
     outfile.write(html)

@@ -42,6 +42,11 @@ table {
 	}
 }
 
+body.chooser .match .team:hover {
+	background-color: #ff9;
+	cursor: pointer;
+}
+
 .match {
 	li {
 		position: relative;
@@ -51,6 +56,10 @@ table {
 			width: 100%;
 			line-height: 1.125;
 			margin: .125em 0;
+		}
+
+		&.user-selected .team {
+			font-family: serif;
 		}
 
 		.seed + .team {

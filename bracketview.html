@@ -1,9 +1,16 @@
 {% macro attrs(round, i) -%}
 {% set data = bracket[round][i] %}
+id="match-{{ round }}-{{ i // 2 }}-{% if i % 2 %}b{% else %}t{% endif %}"
+class="{% if 'class' in kwargs %}{{ kwargs['class'] }} {% endif %}teambox{% if data %} team-{{ data['team'] }}{% if data['correct'] == True %} correct{% elif data['correct'] == False %} incorrect{% endif %}{% if data['won'] == True %} won{% endif %}{% else %} team-empty user-selected{% endif %}"
+data-round="{{ round }}"
 {% if data -%}
-class="{% if 'class' in kwargs %}{{ kwargs['class'] }} {% endif %}teambox team-{{ data['team'] }}{% if data['correct'] == True %} correct{% elif data['correct'] == False %} incorrect{% endif %}{% if data['won'] == True %} won{% endif %}"
 data-team="{{ data['team'] }}"
 data-teamname="{{ data['teamname'] }}"
+{%- endif %}
+{% if round >= 1 and round < 7 -%}
+data-next="match-{{ round + 1 }}-{{ i // 4 }}-{% if i % 4 >= 2 %}b{% else %}t{% endif %}"
+{%- elif round == 0 -%}
+data-next="match-1-{{ data['next'][1] // 2 }}-{% if data['next'][1] % 2 %}b{% else %}t{% endif %}"
 {%- endif %}
 {%- endmacro %}
 {% macro team(round, i) -%}
@@ -11,10 +18,7 @@ data-teamname="{{ data['teamname'] }}"
 {% if round != 7 %}<li {{ attrs(round, i) }}>{% endif %}
 {% if round == 0 %}<span class="seed">{{ data['seed'] }}</span>{% endif %}
 {% if round == 1 %}<span class="seed">{{ seedorder[i%16] }}</span>{% endif %}
-{% if data -%}
-<span class="team">{% if round in (2, 3, 4, 5) %}<abbr title="{{ data['teamname'] }}">{{ data['team'] }}</abbr>{% else %}{{ data['teamname'] }}{% endif %}</span>
-{%- endif %}
-{% if round in (0, 1) %}</span>{% endif %}
+<span class="team">{% if data %}{% if round in (2, 3, 4, 5) %}<abbr title="{{ data['teamname'] }}">{{ data['team'] }}</abbr>{% else %}{{ data['teamname'] }}{% endif %}{% endif %}</span>
 {% if round != 7 %}</li>{% endif %}
 {%- endmacro %}
     <div class="firstfour">

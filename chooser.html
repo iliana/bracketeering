@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bracket chooser</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="chooser">
+    <p>Select the teams you think will win each game of the tournament. When you have selected a team for each game, a submission button will appear.</p>
+{% include "bracketview.html" with context %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+      function teamclick() {
+        // set a bunch of variables
+        var teambox = $(this).parent();
+        var team = teambox.attr('data-team');
+        var teamname = teambox.attr('data-teamname');
+        var round = teambox.attr('data-round');
+        var next = $('#' + teambox.attr('data-next'));
+        var next_team = $('#' + teambox.attr('data-next') + ' .team');
+
+        console.debug(team);
+
+        // check if next round is already filled
+        var old_team = next.attr('data-team');
+
+        // clear team-empty flag
+        next.removeClass('team-empty');
+
+        // set data in next round
+        next.attr('data-team', team);
+        next.attr('data-teamname', teamname);
+
+        // set text in next round
+        if (round == 0 || round >= 6) {
+          next_team.text(teamname);
+        }
+        else
+        {
+          var abbr = next_team.add('abbr');
+          abbr.text(team);
+          abbr.attr('title', teamname);
+        }
+
+        // check each next round for the old team
+        if (typeof old_team !== "undefined") {
+          while (true) {
+            if (typeof next.attr('data-next') === "undefined") {
+              break;
+            }
+            var id = '#' + next.attr('data-next');
+            next = $(id);
+            next_team = $(id + ' .team');
+            if (next.attr('data-team') == old_team) {
+              next.removeAttr('data-team');
+              next.removeAttr('data-teamname');
+              next_team.html('');
+            }
+          }
+        }
+      }
+
+      $(document).ready(function() {
+        $('.match .team').click(teamclick);
+      });
+    </script>
+  </body>
+</html>
+{# vim: set ts=2 sw=2 sta et syntax=jinja: #}
