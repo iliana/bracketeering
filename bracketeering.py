@@ -1,8 +1,8 @@
 from jinja2 import Environment, FileSystemLoader
+import json
 import operator
 import os
 import os.path
-import simplejson
 import sys
 
 # Constants for winners of these rounds (*not* the teams in each round)
@@ -20,7 +20,7 @@ ROUNDSCORES = [2**i for i in range(7)]
 SEEDORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15]
 
 
-class BracketValidationError(StandardError):
+class BracketValidationError(Exception):
     pass
 
 
@@ -29,7 +29,7 @@ def chunks(l, n):
     Yield successive n-sized chunks from l.
     http://stackoverflow.com/a/312464/335888
     """
-    for i in xrange(0, len(l), n):
+    for i in range(0, len(l), n):
         yield l[i:i+n]
 
 
@@ -165,7 +165,7 @@ def main():
         sys.stderr.write("error: {0}: {1}\n".format(
             os.path.join(dir, 'master.json'), e[1]))
         sys.exit(2)
-    master = simplejson.load(masterfile)
+    master = json.load(masterfile)
     masterfile.close()
     # Validate master.json
     try:
@@ -184,7 +184,7 @@ def main():
                 bracketfile = open(os.path.join(dir, filename))
             except IOError as e:
                 continue
-            bracket = simplejson.load(bracketfile)
+            bracket = json.load(bracketfile)
             bracketfile.close()
             try:
                 validate_bracket(start, teams, firstfour, nextsixty, bracket)
