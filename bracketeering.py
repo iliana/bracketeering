@@ -124,6 +124,7 @@ def main():
     teams = []
     firstfour = []  # actually eight
     nextsixty = []  # actually sixty
+    teamnames = {}
     try:
         startfile = open(os.path.join(dir, 'start.txt'))
     except IOError as e:
@@ -136,18 +137,34 @@ def main():
         line = lines[lineno - 1]
         if '/' in line:
             if len(line.split('/')) == 2:
-                start.append(line.split('/'))
-                teams.extend(line.split('/'))
-                firstfour.extend(line.split('/'))
+                team1 = line.split('/')[0].split(' ', 1)
+                team2 = line.split('/')[1].split(' ', 1)
+                start.append([team1[0], team2[0]])
+                teams.extend([team1[0], team2[0]])
+                firstfour.extend([team1[0], team2[0]])
+                if len(team1) == 2:
+                    teamnames[team1[0]] = team1[1]
+                else:
+                    teamnames[team1[0]] = team1[0]
+                if len(team2) == 2:
+                    teamnames[team2[0]] = team2[1]
+                else:
+                    teamnames[team2[0]] = team2[0]
             else:
                 sys.stderr.write("error: start.txt: line %d has multiple "
                                  "slashes\n" % lineno)
                 sys.exit(2)
         else:
-            start.append(line)
-            teams.append(line)
-            nextsixty.append(line)
-    if len(teams) != 68 or len(start) != 64:
+            if ' ' in line:
+                team, teamname = line.split(' ', 1)
+                teamnames[team] = teamname
+            else:
+                team = line
+                teamnames[team] = team
+            start.append(team)
+            teams.append(team)
+            nextsixty.append(team)
+    if len(teams) != 68 or len(teamnames) != 68 or len(start) != 64:
         sys.stderr.write("error: start.txt: not enough teams\n")
         sys.exit(2)
     if len(firstfour) != 8:
@@ -291,10 +308,10 @@ def main():
     outfile.write(html)
     outfile.close()
     brackettpl = env.get_template('bracketpage.html')
-    htmlfirstfour = list(firstfour)
+    htmlfirstfour = [teamnames[i] for i in firstfour]
     if len(master) != 0:
         for i in range(len(htmlfirstfour)):
-            if htmlfirstfour[i] in master[0]:
+            if firstfour[i] in master[0]:
                 htmlfirstfour[i] = '<em>' + htmlfirstfour[i] + '</em>'
     for name in brackets:
         try:
@@ -302,27 +319,42 @@ def main():
         except IOError as e:
             sys.stderr.write("error: {0}: {1}\n".format(dir, e))
             sys.exit(2)
-        htmlbracket = list(brackets[name])
-        htmlbracket[0] = list(start)
+        htmlbracket = [list() for i in range(7)]
+        for team in start:
+            if isinstance(team, list):
+                htmlbracket[0].append(team)
+            else:
+                htmlbracket[0].append(teamnames[team])
+        for round in range(1, 4):
+            htmlbracket[round] = [('<abbr title="{0}">{1}'
+                                   '</abbr>'.format(teamnames[i], i))
+                                  for i in brackets[name][round]]
+        for round in range(4, 7):
+            htmlbracket[round] = [teamnames[i] for i in brackets[name][round]]
         j = 0
         for i in range(len(htmlbracket[0])):
             if isinstance(htmlbracket[0][i], list):
                 # determine who the user picked
                 for team in brackets[name][0]:
                     if team in htmlbracket[0][i]:
+                        teamname = teamnames[team]
                         if len(master) > 1:
                             if team in master[1]:
-                                team = '<em>' + team + '</em>'
+                                teamname = '<em>' + teamname + '</em>'
                         if correct[name][0][j] is True:
-                            htmlbracket[0][i] = '<ins>' + team + '</ins>'
+                            htmlbracket[0][i] = '<ins>' + teamname + '</ins>'
                         elif correct[name][0][j] is False:
-                            htmlbracket[0][i] = '<del>' + team + '</del>'
+                            htmlbracket[0][i] = '<del>' + teamname + '</del>'
                         else:
-                            htmlbracket[0][i] = team
+                            htmlbracket[0][i] = teamname
                 j += 1
-        for round in range(0, len(master) - 1):
+            else:
+                if start[i] in master[1]:
+                    htmlbracket[0][i] = \
+                        '<em>{0}</em>'.format(htmlbracket[0][i])
+        for round in range(1, len(master) - 1):
             for i in range(2**(6-round)):
-                if htmlbracket[round][i] in master[round + 1]:
+                if brackets[name][round][i] in master[round + 1]:
                     htmlbracket[round][i] = \
                         '<em>{0}</em>'.format(htmlbracket[round][i])
         for round in range(1, 7):

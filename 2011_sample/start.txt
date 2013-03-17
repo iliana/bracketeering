@@ -1,64 +1,64 @@
-OSU
-UTSA/ALST
-GMU
-VILL
-WVU
-UAB/CLEM
-UK
-PRIN
-XAV
-MARQ
-SYR
-INST
-WASH
-UGA
-UNC
-LIU
-DUKE
-HAMP
-MICH
-TENN
-ARIZ
-MEM
-TEX
-OAK
-CIN
-MIZZ
-CONN
-BUCK
-TEM
-PSU
-SDSU
-UNCO
-KU
-BU
+OSU Ohio St
+UTSA/ALST Alabama St
+GMU George Mason
+VILL Villanova
+WVU West Virginia
+UAB/CLEM Clemson
+UK Kentucky
+PRIN Princeton
+XAV Xavier
+MARQ Marquette
+SYR Syracuse
+INST Indiana St
+WASH Washington
+UGA Georgia
+UNC North Carolina
+LIU LIU Brooklyn
+DUKE Duke
+HAMP Hampton
+MICH Michigan
+TENN Tennessee
+ARIZ Arizona
+MEM Memphis
+TEX Texas
+OAK Oakland
+CIN Cincinnati
+MIZZ Missouri
+CONN Connecticut
+BUCK Bucknell
+TEM Temple
+PSU Penn St
+SDSU San Diego St
+UNCO N Colorado
+KU Kansas
+BU Boston U
 UNLV
-ILL
-VAN
-RICH
-LOU
-MORE
-GTWN
+ILL Illinois
+VAN Vanderbilt
+RICH Richmond
+LOU Louisville
+MORE Morehead St
+GTWN Georgetown
 USC/VCU
-PUR
-SPC
-TA&M
-FSU
-ND
-AKR
-PITT
-UNCA/UALR
-BUT
-ODU
-KSU
-USU
-WIS
-BEL
-SJU
-GONZ
-BYU
-WOF
+PUR Purdue
+SPC St. Peter's
+TA&M Texas A&M
+FSU Florida St
+ND Notre Dame
+AKR Akron
+PITT Pittsburgh
+UNCA UNC-Asheville/UALR AR-Little Rock
+BUT Butler
+ODU Old Dominion
+KSU Kansas St
+USU Utah St
+WIS Wisconsin
+BEL Belmont
+SJU St. John's
+GONZ Gonzaga
+BYU BYU
+WOF Wofford
 UCLA
-MSU
-FLA
+MSU Michigan St
+FLA Florida
 UCSB
