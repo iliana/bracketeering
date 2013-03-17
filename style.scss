@@ -1,0 +1,330 @@
+body {
+	font-family: sans-serif;
+	font-size: 11pt;
+}
+
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table {
+	border-width: 0;
+	border-collapse: collapse;
+
+	tr:nth-chlid(odd) {
+		background-color: #fcfcfc;
+	}
+
+	th, td {
+		border-color: #999;
+		border-width: 1px;
+		border-style: solid;
+		margin: 0;
+		padding: .3em .6em;
+	}
+
+	th {
+		background-color: #eee;
+	}
+
+	td {
+		text-align: right;
+
+		&:nth-child(2) {
+			text-align: left;
+		}
+	}
+}
+
+.match {
+	li {
+		position: relative;
+	}
+
+	span {
+		position: absolute;
+		bottom: .325em;
+		font-size: .75em;
+
+		.half1 & {
+			left: .5em;
+		}
+
+		.half2 & {
+			right: .5em;
+		}
+	}
+
+	.round1 &, .round2 & {
+		height: 2.75em;
+		background-color: #f3f3f3;
+		border-color: #999;
+		border-style: solid;
+
+		li {
+			border-width: 0;
+			border-color: #999;
+			border-style: solid;
+			display: block;
+			height: 1.375em;
+			padding: 1px .5em 0 .5em;
+
+			&:first-child {
+				border-top-width: 1px;
+				margin-bottom: -4px;
+			}
+
+			&:last-child {
+				border-bottom-width: 1px;
+			}
+		}
+
+		.half1 & {
+			border-width: 0 1px 0 0;
+		}
+
+		.half2 & {
+			border-width: 0 0 0 1px;
+		}
+	}
+
+	.round3 &, .round4 &, .round5 & {
+		margin: .5em 0;
+
+		li {
+			border-width: 0 0 1px 0;
+			border-color: #999;
+			border-style: solid;
+			display: block;
+			padding-left: .5em;
+			padding-right: .5em;
+			vertical-align: bottom;
+			height: 1.25em;
+
+			&:last-child {
+				.half1 & {
+					border-right-width: 1px;
+				}
+
+				.half2 & {
+					border-width: 0 0 1px 1px;
+				}
+			}
+		}
+	}
+
+	.round1 & {
+		margin: .5em 0;
+	}
+
+	.round2 & {
+		margin: 3.75em 0;
+
+		&:first-child {
+			margin-top: 2.125em;
+		}
+	}
+
+	.round3 & {
+		height: 12.5em;
+
+		li:first-child {
+			padding-top: 1.875em;
+		}
+
+		li:last-child {
+			padding-top: 5.125em;
+		}
+	}
+
+	.round4 & {
+		height: 25.5em;
+
+		li:first-child {
+			padding-top: 5.125em;
+		}
+
+		li:last-child {
+			padding-top: 11.625em;
+		}
+	}
+
+	.round5 & {
+		height: 51.5em;
+
+		li:first-child {
+			padding-top: 11.625em;
+		}
+
+		li:last-child {
+			padding-top: 24.625em;
+		}
+	}
+
+	.finalfour & {
+		li {
+			border-width: 0;
+			border-color: #999;
+			border-style: solid;
+			display: block;
+			height: 1.25em;
+			margin-top: 13.375em;
+			border-width: 0 0 1px 0;
+
+			&:first-child {
+				padding-top: 5.125em;
+			}
+
+			&:last-child {
+				padding-top: 18.25em;
+			}
+		}
+	}
+
+	.half1 & {
+		text-align: right;
+	}
+}
+
+.bracket, .firstfour {
+	ul {
+		padding: 0;
+		list-style-type: none;
+	}
+
+	em {
+		font-style: inherit;
+		font-weight: bold;
+	}
+
+	ins {
+		text-decoration: inherit;
+		color: #090;
+	}
+
+	del {
+		color: #900;
+	}
+}
+
+.bracket {
+	position: relative;
+	width: 100%;
+}
+
+.firstfour {
+	margin: 2em auto 0;
+	text-align: center;
+
+	ul {
+		width: 9%;
+		height: 2.75em;
+		margin: 0 2%;
+		text-align: right;
+		display: inline-block;
+		background-color: #f3f3f3;
+		border: 1px solid #999;
+		position: relative;
+
+		span {
+			position: absolute;
+			left: 0;
+			bottom: .0875em;
+			font-size: .75em;
+		}
+	}
+
+	li {
+		position: absolute;
+		left: .5em;
+		right: .5em;
+
+		&:first-child {
+			bottom: 1.375em;
+		}
+
+		&:last-child {
+			top: 1.375em;
+		}
+	}
+}
+
+.round1, .round2, .round3, .round4, .round5, .finalfour li, .champion {
+	position: absolute;
+}
+
+.round1, .round2 {
+	width: 8%;
+}
+
+.round3, .round4, .round5 {
+	width: 9%;
+}
+
+.finalfour li {
+	width: 9%;
+	text-align: center;
+
+	&:first-child {
+		left: 43%;
+	}
+
+	&:last-child {
+		left: 48%;
+	}
+}
+
+.champion {
+	width: 10%;
+	height: 1.25em;
+	padding: 1em 0;
+	margin-top: 24.5em;
+	text-align: center;
+	border: 1px solid #999;
+	left: 45%;
+}
+
+.half1 {
+	.round1 {
+		left: 0;
+	}
+
+	.round2 {
+		left: 8%;
+	}
+
+	.round3 {
+		left: 16%;
+	}
+
+	.round4 {
+		left: 25%;
+	}
+
+	.round5 {
+		left: 34%;
+	}
+}
+
+.half2 {
+	.round1 {
+		right: 0;
+	}
+
+	.round2 {
+		right: 8%;
+	}
+
+	.round3 {
+		right: 16%;
+	}
+
+	.round4 {
+		right: 25%;
+	}
+
+	.round5 {
+		right: 34%;
+	}
+}
