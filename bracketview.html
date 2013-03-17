@@ -12,7 +12,7 @@ data-teamname="{{ data['teamname'] }}"
 {% if round == 0 %}<span class="seed">{{ data['seed'] }}</span>{% endif %}
 {% if round == 1 %}<span class="seed">{{ seedorder[i%16] }}</span>{% endif %}
 {% if data -%}
-<span class="team">{% if round in (2, 3, 4, 5) %}{{ data['team'] }}{% else %}{{ data['teamname'] }}{% endif %}</span>
+<span class="team">{% if round in (2, 3, 4, 5) %}<abbr title="{{ data['teamname'] }}">{{ data['team'] }}</abbr>{% else %}{{ data['teamname'] }}{% endif %}</span>
 {%- endif %}
 {% if round in (0, 1) %}</span>{% endif %}
 {% if round != 7 %}</li>{% endif %}
