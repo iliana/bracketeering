@@ -16,7 +16,8 @@ CHAMPIONSHIP = 7
 
 ROUNDNAMES = ["first four", "second round", "third round", "sweet sixteen",
               "elite eight", "final four", "championship game"]
-ROUNDSCORES = [2**i for i in range(7)]
+#ROUNDSCORES = [2**i for i in range(7)]
+ROUNDSCORES = [1, 2, 3, 5, 8, 13, 21]
 SEEDORDER = [1, 16, 8, 9, 5, 12, 4, 13, 6, 11, 3, 14, 7, 10, 2, 15]
 
 
@@ -401,10 +402,6 @@ def main():
                                    'correct': None,
                                    'winnerof': None,
                                    'next': (1, j)})
-            if team[0] in brackets[name][0]:
-                otherteam = team[0]
-            else:
-                otherteam = team[1]
             bracket[1].append(None)
         else:
             bracket[1].append({'team': team,
