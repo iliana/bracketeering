@@ -1,0 +1,64 @@
+LOU Louisville
+NCAT N Carolina A&T/LIB Liberty
+CSU Colorado St
+MIZZ Missouri
+OKST Oklahoma St
+ORE Oregon
+SLU Saint Louis
+NMSU New Mexico St
+MEM Memphis
+MTU Mid Tennessee/SMC Saint Mary's
+MSU Michigan St
+VALP Valparaiso
+CREI Creighton
+CIN Cincinnati
+DUKE Duke
+ALBY Albany
+GONZ Gonzaga
+SOU Southern
+PITT Pittsburgh
+WICH Wichita St
+WIS Wisconsin
+MISS Ole Miss
+KSU Kansas St
+BSU Boise St/LAS La Salle
+ARIZ Arizona
+BEL Belmont
+UNM New Mexico
+HARV Harvard
+ND Notre Dame
+ISU Iowa St
+OSU Ohio St
+IONA Iona
+KU Kansas
+WKU W Kentucky
+UNC North Carolina
+VILL Villanova
+VCU
+AKR Akron
+MICH Michigan
+SDST S Dakota St
+UCLA
+MINN Minnesota
+FLA Florida
+NWST NW St
+SDSU San Diego St
+OKLA Oklahoma
+GTWN Georgetown
+FGCU
+IND Indiana
+LIU LIU Brooklyn/JMU James Madison
+NCST NC State
+TEM Temple
+UNLV
+CAL California
+SYR Syracuse
+MONT Montana
+BUT Butler
+BUCK Bucknell
+MARQ Marquette
+DAV Davidson
+ILL Illinois
+COLO Colorado
+MIA Miami (FL)
+PAC Pacific
