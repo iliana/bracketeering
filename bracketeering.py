@@ -307,6 +307,7 @@ def main():
         'ranks': ranks,
         'scores': scores,
         'pointsp': pointsp,
+        'roundscores': ROUNDSCORES,
     }
     html = rankstpl.render(**htmlvars)
     outfile.write(html)
@@ -379,6 +380,7 @@ def main():
             'pointsp': pointsp[name],
             'bracket': bracket,
             'seedorder': SEEDORDER,
+            'roundscores': ROUNDSCORES,
         }
         html = brackettpl.render(**htmlvars)
         outfile.write(html)
