@@ -1,0 +1,64 @@
+FLA Florida
+ALBY Albany/MSM Mount St. Mary's
+COLO Colorado
+PITT Pittsburgh
+VCU
+SFA Stephen F. Austin
+UCLA
+TLSA Tulsa
+OSU Ohio St.
+DAY Dayton
+SYR Syracuse
+WMU Western Michigan
+UNM New Mexico
+STAN Stanford
+KU Kansas
+EKY Eastern Kentucky
+UVA Virginia
+CCAR Coastal Carolina
+MEM Memphis
+GW George Washington
+CIN Cincinnati
+HARV Harvard
+MSU Michigan St.
+DEL Delaware
+UNC North Carolina
+PROV Providence
+ISU Iowa St.
+NCCU North Carolina Central
+CONN Connecticut
+JOES Saint Joseph's
+VILL Villanova
+MILW Milwaukee
+ARIZ Arizona
+WEB Weber St.
+GONZ Gonzaga
+OKST Oklahoma St.
+OKLA Oklahoma
+NDSU North Dakota St.
+SDSU San Diego St.
+NMSU New Mexico St.
+BAY Baylor
+NEB Nebraska
+CREI Creighton
+ULL Louisiana Lafayette
+ORE Oregon
+BYU
+WIS Wisconsin
+AMER American
+WICH Wichita St.
+CP Cal Poly/TXSO Texas Southern
+UK Kentucky
+KSU Kansas St.
+SLU Saint Louis
+NCST North Carolina St./XAV Xavier
+LOU Louisville
+MAN Manhattan
+MASS Massachusetts
+TENN Tennessee/IOWA Iowa
+DUKE Duke
+MER Mercer
+TEX Texas
+ASU Arizona St.
+MICH Michigan
+WOF Wofford
