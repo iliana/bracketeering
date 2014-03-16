@@ -1,0 +1,232 @@
+body {
+  font-family: sans-serif;
+  font-size: 14px;
+  line-height: 1.375; }
+
+abbr {
+  border-width: inherit; }
+
+button {
+  font-size: 1.5em; }
+
+.centered {
+  margin-left: auto;
+  margin-right: auto; }
+
+table {
+  border-width: 0;
+  border-collapse: collapse; }
+  table tr:nth-chlid(odd) {
+    background-color: #fcfcfc; }
+  table th, table td {
+    border-color: #999;
+    border-width: 1px;
+    border-style: solid;
+    margin: 0;
+    padding: .3em .6em; }
+  table th {
+    background-color: #eee; }
+  table td {
+    text-align: right; }
+    table td:nth-child(2) {
+      text-align: left; }
+
+body.chooser .match .team:hover {
+  background-color: #ff9;
+  cursor: pointer; }
+
+body.highlight .match .team-empty {
+  background-color: #ff0; }
+
+.match li {
+  position: relative; }
+  .match li .team {
+    display: inline-block;
+    width: 100%;
+    line-height: 1.125;
+    margin: .125em 0; }
+  .match li.user-selected .team {
+    font-family: serif; }
+  .match li .seed + .team {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -moz-box-sizing: padding-box; }
+    .half1 .match li .seed + .team, .firstfour .match li .seed + .team {
+      padding-left: 2ch; }
+    .half2 .match li .seed + .team {
+      padding-right: 2ch; }
+.match .seed {
+  position: absolute;
+  color: #666; }
+  .half1 .match .seed {
+    left: .5em; }
+  .half2 .match .seed {
+    right: .5em; }
+.round1 .match, .round2 .match {
+  height: 2.75em;
+  background-color: #f3f3f3;
+  border-color: #999;
+  border-style: solid; }
+  .round1 .match li, .round2 .match li {
+    border-width: 0;
+    border-color: #999;
+    border-style: solid;
+    display: block;
+    height: 1.375em;
+    padding: 1px .5em 0 .5em; }
+    .round1 .match li:first-child, .round2 .match li:first-child {
+      border-top-width: 1px;
+      margin-bottom: -4px; }
+    .round1 .match li:last-child, .round2 .match li:last-child {
+      border-bottom-width: 1px; }
+  .half1 .round1 .match, .half1 .round2 .match {
+    border-width: 0 1px 0 0; }
+  .half2 .round1 .match, .half2 .round2 .match {
+    border-width: 0 0 0 1px; }
+.round3 .match, .round4 .match, .round5 .match {
+  margin: .5em 0; }
+  .round3 .match li, .round4 .match li, .round5 .match li {
+    border-width: 0 0 1px 0;
+    border-color: #999;
+    border-style: solid;
+    display: block;
+    padding-left: .5em;
+    padding-right: .5em;
+    vertical-align: bottom;
+    height: 1.25em; }
+    .half1 .round3 .match li:last-child, .half1 .round4 .match li:last-child, .half1 .round5 .match li:last-child {
+      border-right-width: 1px; }
+    .half2 .round3 .match li:last-child, .half2 .round4 .match li:last-child, .half2 .round5 .match li:last-child {
+      border-width: 0 0 1px 1px; }
+.round1 .match {
+  margin: .5em 0; }
+.round2 .match {
+  margin: 3.75em 0; }
+  .round2 .match:first-child {
+    margin-top: 2.125em; }
+.round3 .match {
+  height: 12.5em; }
+  .round3 .match li:first-child {
+    padding-top: 1.875em; }
+  .round3 .match li:last-child {
+    padding-top: 5.125em; }
+.round4 .match {
+  height: 25.5em; }
+  .round4 .match li:first-child {
+    padding-top: 5.125em; }
+  .round4 .match li:last-child {
+    padding-top: 11.625em; }
+.round5 .match {
+  height: 51.5em; }
+  .round5 .match li:first-child {
+    padding-top: 11.625em; }
+  .round5 .match li:last-child {
+    padding-top: 24.625em; }
+.finalfour .match li {
+  border-width: 0;
+  border-color: #999;
+  border-style: solid;
+  display: block;
+  height: 1.25em;
+  margin-top: 13.375em;
+  border-width: 0 0 1px 0; }
+  .finalfour .match li:first-child {
+    padding-top: 5.125em; }
+  .finalfour .match li:last-child {
+    padding-top: 18.25em; }
+.half1 .match {
+  text-align: right; }
+
+.bracket ul, .firstfour ul {
+  padding: 0;
+  list-style-type: none; }
+.bracket .won .team, .firstfour .won .team {
+  font-style: inherit;
+  font-weight: bold; }
+.bracket .correct .team, .firstfour .correct .team {
+  text-decoration: none;
+  color: #090; }
+.bracket .incorrect .team, .firstfour .incorrect .team {
+  text-decoration: line-through;
+  color: #900; }
+
+.bracket {
+  position: relative;
+  width: 100%; }
+
+.firstfour {
+  margin: 2em auto 0;
+  text-align: center; }
+  .firstfour ul {
+    width: 14%;
+    height: 2.75em;
+    margin: 0 2%;
+    text-align: right;
+    display: inline-block;
+    background-color: #f3f3f3;
+    border: 1px solid #999; }
+  .firstfour li {
+    padding: 1px 0.5em 0;
+    position: relative;
+    height: 1.375em; }
+    .firstfour li:first-child {
+      margin-bottom: -4px; }
+
+.round1, .round2, .round3, .round4, .round5, .finalfour li, .champion {
+  position: absolute; }
+
+.round1 {
+  width: 14%; }
+
+.round2, .round3, .round4, .round5 {
+  width: 6.5%; }
+
+.finalfour li {
+  width: 14%;
+  text-align: center; }
+  .finalfour li:first-child {
+    left: 40%; }
+  .finalfour li:last-child {
+    left: 46%;
+    z-index: -5; }
+
+.champion {
+  width: 14%;
+  height: 1.25em;
+  padding: 1em 0;
+  margin-top: 24.5em;
+  text-align: center;
+  border: 1px solid #999;
+  left: 43%; }
+  .champion.user-selected {
+    font-family: serif; }
+
+.below-champ {
+  width: 14%;
+  text-align: center;
+  position: absolute;
+  left: 43%;
+  margin-top: 34.5em; }
+
+.half1 .round1 {
+  left: 0; }
+.half1 .round2 {
+  left: 14%; }
+.half1 .round3 {
+  left: 20.5%; }
+.half1 .round4 {
+  left: 27%; }
+.half1 .round5 {
+  left: 33.5%; }
+
+.half2 .round1 {
+  right: 0; }
+.half2 .round2 {
+  right: 14%; }
+.half2 .round3 {
+  right: 20.5%; }
+.half2 .round4 {
+  right: 27%; }
+.half2 .round5 {
+  right: 33.5%; }
