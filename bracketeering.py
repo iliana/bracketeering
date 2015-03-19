@@ -243,7 +243,7 @@ def main():
             roundcorrect = []
             roundscore = 0
             for team in brackets[name][i]:
-                if i != SECONDROUND and team in brackets[name][i-1]:
+                if team in brackets[name][i-1]:
                     if correct[name][i-1][brackets[name][i-1].index(team)] \
                        is False:
                         roundcorrect.append(False)
