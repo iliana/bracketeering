@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
     <title>Bracket chooser</title>
     <link rel="stylesheet" href="style.css">
   </head>
@@ -9,11 +10,12 @@
 {% include "bracketview.html" with context %}
     <div class="below-champ">
       <p id="nagbox">Decide <span id="nagboxcount">67</span> more games</p>
-      <p><button id="submit">Ready to submit</button></p>
+      <form id="submitform" style="display: none;" action="https://lambda.us-west-2.buttslol.net/brackets2016/" method="post">
+        <input type="hidden" name="bracketjson" id="bracketjson">
+        <input type="text" name="name" id="form-name" placeholder="Your name" autocomplete="off">
+        <input type="submit" id="form-submit" value="Ready to submit" disabled>
+      </form>
     </div>
-    <form id="submitform" style="display: none;" action="" method="post">
-      <input type="hidden" name="bracketjson" id="bracketjson">
-    </form>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
       function random() {
@@ -49,12 +51,12 @@
 
         if (i <= 0) {
           $('#nagbox').hide();
-          $('#submit').show();
+          $('#submitform').show();
         }
         else
         {
           $('#nagbox').show();
-          $('#submit').hide();
+          $('#submitform').hide();
         }
 
         return i;
@@ -112,10 +114,12 @@
 
       $(document).ready(function() {
         $('.match .team').click(teamclick);
+        $('#form-name').on("change keyup paste", function () {
+          $('#form-submit').prop('disabled', $('#form-name').val() === "");
+        });
         checkentry();
-        $('#submit').click(function () {
+        $('#submitform').submit(function () {
           $('#bracketjson').val(entrycode());
-          $('#submitform').submit();
         });
       });
     </script>
