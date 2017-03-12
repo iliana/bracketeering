@@ -50,10 +50,7 @@ body.highlight .match .team-empty {
   .match li .seed + .team {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    -moz-box-sizing: padding-box; }
-    .half1 .match li .seed + .team, .firstfour .match li .seed + .team {
-      padding-left: 2ch; }
+    text-overflow: ellipsis; }
     .half2 .match li .seed + .team {
       padding-right: 2ch; }
 .match .seed {

@@ -74,11 +74,6 @@ body.highlight .match .team-empty {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			-moz-box-sizing: padding-box;
-
-			.half1 &, .firstfour & {
-				padding-left: 2ch;
-			}
 
 			.half2 & {
 				padding-right: 2ch;
